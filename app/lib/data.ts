@@ -9,6 +9,7 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 
+
 export async function fetchRevenue() {
   try {
     // Artificially delay a response for demo purposes.
@@ -29,6 +30,7 @@ export async function fetchRevenue() {
   }
 }
 
+
 export async function fetchLatestInvoices() {
   try {
     const data = await sql<LatestInvoiceRaw>`
@@ -48,6 +50,7 @@ export async function fetchLatestInvoices() {
     throw new Error('Failed to fetch the latest invoices.');
   }
 }
+
 
 export async function fetchCardData() {
   try {
@@ -83,6 +86,7 @@ export async function fetchCardData() {
     throw new Error('Failed to fetch card data.');
   }
 }
+
 
 const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(
@@ -120,6 +124,7 @@ export async function fetchFilteredInvoices(
   }
 }
 
+
 export async function fetchInvoicesPages(query: string) {
   try {
     const count = await sql`SELECT COUNT(*)
@@ -141,6 +146,7 @@ export async function fetchInvoicesPages(query: string) {
   }
 }
 
+
 export async function fetchInvoiceById(id: string) {
   try {
     const data = await sql<InvoiceForm>`
@@ -159,12 +165,14 @@ export async function fetchInvoiceById(id: string) {
       amount: invoice.amount / 100,
     }));
 
+    console.log(invoice); // Invoice is an empty array []
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
   }
 }
+
 
 export async function fetchCustomers() {
   try {
@@ -183,6 +191,7 @@ export async function fetchCustomers() {
     throw new Error('Failed to fetch all customers.');
   }
 }
+
 
 export async function fetchFilteredCustomers(query: string) {
   try {
